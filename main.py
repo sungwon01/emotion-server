@@ -20,3 +20,5 @@ collection = db[MONGO_COLLECTION]
 
 # 라우터 등록
 app.include_router(endpoints.router)
+
+app.state.collection = collection

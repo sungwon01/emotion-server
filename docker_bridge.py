@@ -6,16 +6,16 @@ from openai import OpenAI
 load_dotenv()
 
 # 컨테이너 설정
-TEXT_CONTAINER = os.getenv("TEXT_CONTAINER", "text-emotion")
+TEXT_CONTAINER = os.getenv("TEXT_CONTAINER_NAME", "text-emotion")
 TEXT_PORT = os.getenv("TEXT_PORT", "8001")
 
-AUDIO_CONTAINER = os.getenv("AUDIO_CONTAINER", "audio-emotion")
+AUDIO_CONTAINER = os.getenv("AUDIO_CONTAINER_NAME", "ser-audio-container")
 AUDIO_PORT = os.getenv("AUDIO_PORT", "8002")
 
-IMAGE_CONTAINER = os.getenv("IMAGE_CONTAINER", "image-emotion")
+IMAGE_CONTAINER = os.getenv("IMAGE_CONTAINER_NAME", "ser-face-container")
 IMAGE_PORT = os.getenv("IMAGE_PORT", "8003")
 
-VIDEO_CONTAINER = os.getenv("VIDEO_CONTAINER", "video-emotion")
+VIDEO_CONTAINER = os.getenv("VIDEO_CONTAINER_NAME", "video-emotion")
 VIDEO_PORT = os.getenv("VIDEO_PORT", "8004")
 
 # OpenAI API 설정
@@ -63,7 +63,7 @@ def convert_emotion_to_openai_output(emotion_result: dict) -> dict:
         prompt = f"Return an 8-bit RGB color code (like 'R:255, G:0, B:0') that matches the emotion '{emotion}'."
 
     response = openai_client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are an assistant that maps emotions to expressive output."},
             {"role": "user", "content": prompt}

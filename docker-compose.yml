@@ -10,6 +10,8 @@ services:
       - .env
     depends_on:
       - mongo
+      - text-emotion
+      - video-emotion
 
   mongo:
     image: mongo:6.0
@@ -18,6 +20,22 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+
+  text-emotion:
+    build:
+      context: ../text-emotion
+    container_name: text-emotion
+    ports:
+    - "8001:8001"
+    restart: unless-stopped
+  
+  video-emotion:
+    build:
+      context: ../video-emotion
+    container_name: video-emotion
+    ports:
+      - "8004:8004"
+    restart: unless-stopped
 
 volumes:
   mongo_data:
